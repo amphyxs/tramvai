@@ -58,6 +58,9 @@
         },
         {
             "path": "../plugin-webpack-pwa"
+        },
+        {
+            "path": "../tramvai/papi"
         }
     ]
 }

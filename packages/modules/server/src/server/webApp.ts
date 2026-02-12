@@ -30,6 +30,7 @@ import { REACT_SERVER_RENDER_MODE, type FETCH_WEBPACK_STATS_TOKEN } from '@tramv
 import type { DI_TOKEN, ExtractDependencyType } from '@tinkoff/dippy';
 import { optional, provide } from '@tinkoff/dippy';
 import type { STATIC_ROOT_ERROR_BOUNDARY_ERROR_TOKEN } from '@tramvai/tokens-server';
+import { restoreFormActionResult } from '@tramvai/module-form-action';
 import { errorHandler } from './error';
 
 export const webAppFactory = ({ server }: { server: typeof SERVER_TOKEN }) => {
@@ -150,6 +151,7 @@ export const webAppInitCommand = ({
 
             const di = commandLineRunner.resolveDi('server', 'customer', rootDi, providers);
             const storage = asyncLocalStorage.getStore();
+            restoreFormActionResult(request, di);
 
             if (storage) {
               // save Request DI container to async local storage context for current request

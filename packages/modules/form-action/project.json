@@ -1,0 +1,14 @@
+{
+  "name": "@tramvai/module-form-action",
+  "sourceRoot": "packages/modules/form-action/src",
+  "projectType": "library",
+  "targets": {
+    "build-publish": {
+      "outputs": [
+        "packages/modules/form-action/package.json",
+        "packages/modules/form-action/lib"
+      ],
+      "executor": "@tramvai/nx-plugin:build"
+    }
+  }
+}
