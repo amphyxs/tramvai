@@ -3,7 +3,7 @@ import { ChildContainer, DI_TOKEN } from '@tinkoff/dippy';
 import { COMMAND_LINE_RUNNER_TOKEN } from '@tramvai/tokens-core';
 import { RESPONSE_MANAGER_TOKEN, STORE_TOKEN } from '@tramvai/tokens-common';
 import { HttpError } from '@tinkoff/errors';
-import { FormActionRedirect, FormActionResult } from './formActionResult.type';
+import { FormActionRedirect, FormActionResult } from './formActionResult';
 import { setFormActionResult } from './formActionModule';
 
 export async function getFormActionReply(

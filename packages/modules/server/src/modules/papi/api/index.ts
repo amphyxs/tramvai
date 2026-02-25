@@ -14,6 +14,7 @@ import { FASTIFY_REQUEST, FASTIFY_RESPONSE, PAPI_EXECUTOR } from '@tramvai/token
 import { ChildContainer, createChildContainer, Scope } from '@tinkoff/dippy';
 import { HttpError, RedirectFoundError } from '@tinkoff/errors';
 import {
+  formActionHttpMethods,
   FormActionParameters,
   FormActionResult,
   getFormActionReply,
@@ -113,7 +114,7 @@ export function createApi(
 
         // For form actions, register handlers for all methods except GET, HEAD
         const methods = isFormActions
-          ? (['post', 'put', 'delete', 'patch', 'options'] as const)
+          ? formActionHttpMethods.map((method) => method.toLowerCase())
           : [papiParams.method];
 
         for (const method of methods) {

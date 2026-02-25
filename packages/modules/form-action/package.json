@@ -23,6 +23,7 @@
     "@tramvai/state": "0.0.0-stub",
     "@tramvai/tokens-common": "0.0.0-stub",
     "@tramvai/tokens-core": "0.0.0-stub",
+    "react": ">=16.14.0",
     "tslib": "^2.4.0"
   },
   "module": "lib/index.es.js",
