@@ -11,6 +11,19 @@
         "outDir": "./lib",
         "strict": true
     },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx"
+    ],
+    "exclude": [
+        "__integration__",
+        "lib",
+        "dist",
+        "node_modules",
+        "playwright.config.ts",
+        "jest.integration.config.js",
+        "env.development.js"
+    ],
     "references": [
         {
             "path": "../../packages/libs/dippy"
@@ -62,6 +75,9 @@
         },
         {
             "path": "../../packages/modules/form-action"
+        },
+        {
+            "path": "../../packages/tramvai/test/playwright"
         }
     ]
 }
