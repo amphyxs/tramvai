@@ -32,6 +32,36 @@ test.describe("form-actions", () => {
           data: { result: "Hello, world!", username: "TestUser" },
         });
       });
+
+      test("should update FormActionResultStore with JSON result", async ({
+        app,
+        page,
+      }) => {
+        await page.goto(app.serverUrl);
+
+        const postForm = page.locator("form", {
+          has: page.locator('input[name="formName"][value="postCurrentUrl"]'),
+        });
+
+        await postForm.locator("#username").fill("StoreUser");
+
+        await Promise.all([
+          page.waitForResponse(
+            (resp) =>
+              resp.url().includes(app.serverUrl) &&
+              resp.request().method() === "POST",
+          ),
+          postForm.locator('input[type="submit"]').click(),
+        ]);
+
+        const resultText = await page
+          .locator("p", { hasText: "Result from form action:" })
+          .first()
+          .textContent();
+
+        expect(resultText).toContain("Hello, world!");
+        expect(resultText).toContain("StoreUser");
+      });
     });
 
     test.describe("POST form with redirect response", () => {
@@ -64,6 +94,62 @@ test.describe("form-actions", () => {
           redirectUrl: "/success",
           data: { result: "Hello, success!", username: "TestUser" },
         });
+      });
+
+      test("should perform SPA navigation to redirect URL without full page reload", async ({
+        app,
+        page,
+      }) => {
+        await page.goto(app.serverUrl);
+
+        // Mark the current page session — a SPA navigation preserves this value
+        await page.evaluate(() => {
+          (window as any).__spaMarker = true;
+        });
+
+        const postForm = page.locator("form", {
+          has: page.locator('input[name="formName"][value="postCurrentUrl"]'),
+        });
+
+        await postForm.locator("#username").fill("SpaUser");
+        await postForm.locator("#redirect").check();
+
+        await postForm.locator('input[type="submit"]').click();
+
+        await page.locator("h1", { hasText: "Success!" }).waitFor();
+
+        expect(page.url()).toContain("/success");
+
+        // window.__spaMarker is still true — page was NOT reloaded
+        const isSpa = await page.evaluate(
+          () => (window as any).__spaMarker === true,
+        );
+        expect(isSpa).toBe(true);
+      });
+
+      test("should populate FormActionResultStore on success page after SPA redirect", async ({
+        app,
+        page,
+      }) => {
+        await page.goto(app.serverUrl);
+
+        const postForm = page.locator("form", {
+          has: page.locator('input[name="formName"][value="postCurrentUrl"]'),
+        });
+
+        await postForm.locator("#username").fill("RedirectStoreUser");
+        await postForm.locator("#redirect").check();
+
+        await postForm.locator('input[type="submit"]').click();
+
+        await page.locator("h1", { hasText: "Success!" }).waitFor();
+
+        const resultText = await page
+          .locator("p", { hasText: "Result from form action:" })
+          .textContent();
+
+        expect(resultText).toContain("Hello, success!");
+        expect(resultText).toContain("RedirectStoreUser");
       });
     });
 
