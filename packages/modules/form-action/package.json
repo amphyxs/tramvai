@@ -20,6 +20,7 @@
     "@tinkoff/dippy": "0.0.0-stub",
     "@tinkoff/errors": "0.0.0-stub",
     "@tramvai/papi": "0.0.0-stub",
+    "@tinkoff/router": "0.0.0-stub",
     "@tramvai/state": "0.0.0-stub",
     "@tramvai/tokens-common": "0.0.0-stub",
     "@tramvai/tokens-core": "0.0.0-stub",

@@ -1,10 +1,13 @@
-import React, { PropsWithChildren } from 'react';
-import { FormActionHttpMethods } from './formActionHttpMethods';
-import { FormActionResponse } from './formActionResult';
+import React, { PropsWithChildren } from "react";
+import { useEvents } from "@tramvai/state";
+import { useNavigate } from "@tinkoff/router";
+import { FormActionHttpMethods } from "./formActionHttpMethods";
+import { FormActionResponse } from "./formActionResult";
+import { setFormActionResult } from "./formActionModule";
 
 type Props = PropsWithChildren<{
   action?: string;
-  method?: 'GET' | FormActionHttpMethods;
+  method?: "GET" | FormActionHttpMethods;
   beforeSubmit?: (formData: FormData) =>
     | Promise<{
         formData: FormData;
@@ -14,12 +17,20 @@ type Props = PropsWithChildren<{
         formData: FormData;
         preventDefault: boolean;
       };
-  afterResponse?: (formActionResponse: FormActionResponse) => Promise<void> | void;
-  encType?: 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain';
+  afterResponse?: (
+    formActionResponse: FormActionResponse,
+  ) => Promise<void> | void;
+  encType?:
+    | "application/x-www-form-urlencoded"
+    | "multipart/form-data"
+    | "text/plain";
   name?: string;
 }>;
 
 export const Form = (props: Props) => {
+  const dispatchFormActionResult = useEvents(setFormActionResult);
+  const navigate = useNavigate();
+
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -39,13 +50,19 @@ export const Form = (props: Props) => {
     const response = await fetch(form.action, {
       method: form.method,
       headers: {
-        Accept: 'application/json',
-        'Enc-Type': form.enctype,
+        Accept: "application/json",
+        "Enc-Type": form.enctype,
       },
       body: formData,
     });
 
     const responseJson: FormActionResponse = await response.json();
+
+    dispatchFormActionResult(responseJson.data);
+
+    if (responseJson.type === "redirect") {
+      await navigate(responseJson.redirectUrl);
+    }
 
     if (props.afterResponse) {
       await props.afterResponse(responseJson);
@@ -55,7 +72,7 @@ export const Form = (props: Props) => {
   return (
     <form
       action={props.action}
-      method={props.method ?? 'POST'}
+      method={props.method ?? "POST"}
       encType={props.encType}
       onSubmit={(event) => onSubmit(event)}
     >
