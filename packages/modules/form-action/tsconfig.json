@@ -17,6 +17,9 @@
             "path": "../../tramvai/state"
         },
         {
+            "path": "../../libs/router"
+        },
+        {
             "path": "../../tokens/common"
         },
         {
@@ -27,6 +30,9 @@
         },
         {
             "path": "../../tokens/core"
+        },
+        {
+            "path": "../../tokens/server"
         }
     ]
 }

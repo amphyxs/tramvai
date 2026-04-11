@@ -1,29 +1,9 @@
 import { PageComponent } from '@tramvai/react';
 import { useStore } from '@tramvai/state';
-import { FormActionResultStore } from '@tramvai/module-form-action';
+import { FormActionResultStore, Form } from '@tramvai/module-form-action';
 
 export const MainPage: PageComponent = () => {
   const formActionData = useStore(FormActionResultStore);
-
-  // TODO: временная JS-логика для примера, пока не сделан компонент Form
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    const json = JSON.stringify(Object.fromEntries(formData));
-
-    const response = await fetch(form.action, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: json,
-    });
-
-    console.log(response);
-  };
 
   return (
     <div>
@@ -32,7 +12,8 @@ export const MainPage: PageComponent = () => {
       <p>Result from form action: {JSON.stringify(formActionData) ?? '-'}</p>
 
       <h2>Form with method POST, action on current URL</h2>
-      <form method="POST" onSubmit={(event) => onSubmit(event)}>
+
+      <Form method="POST" afterResponse={(response) => console.log(response)} name="postCurrentUrl" resilient>
         <fieldset>
           <legend>Form action response type</legend>
           <div>
@@ -44,13 +25,7 @@ export const MainPage: PageComponent = () => {
           <div>
             <label htmlFor="redirect">
               Redirect{'\t'}
-              <input
-                type="radio"
-                id="redirect"
-                name="responseType"
-                value="redirect"
-                defaultChecked
-              />
+              <input type="radio" id="redirect" name="responseType" value="redirect" />
             </label>
           </div>
         </fieldset>
@@ -64,10 +39,10 @@ export const MainPage: PageComponent = () => {
         <br />
         <br />
         <input type="submit" value="Submit" />
-      </form>
+      </Form>
 
       <h2>Form with method GET, action on current URL</h2>
-      <form method="GET" onSubmit={(event) => onSubmit(event)}>
+      <Form method="GET" afterResponse={(response) => console.log(response)} name="getCurrentUrl">
         <label htmlFor="q">
           Search{'\t'}
           <input type="text" name="q" id="q" />
@@ -76,10 +51,15 @@ export const MainPage: PageComponent = () => {
         <br />
         <br />
         <input type="submit" value="Submit" />
-      </form>
+      </Form>
 
       <h2>Form with method POST, action on another URL</h2>
-      <form method="POST" action="/api/custom-form" onSubmit={(event) => onSubmit(event)}>
+      <Form
+        method="POST"
+        action="/api/custom-form"
+        afterResponse={(response) => console.log(response)}
+        name="postAnotherUrl"
+      >
         <label htmlFor="name">
           Name{'\t'}
           <input type="text" name="name" id="name" />
@@ -88,10 +68,15 @@ export const MainPage: PageComponent = () => {
         <br />
         <br />
         <input type="submit" value="Submit" />
-      </form>
+      </Form>
 
       <h2>Form with method GET, action on another URL</h2>
-      <form method="GET" action="schema-validation" onSubmit={(event) => onSubmit(event)}>
+      <Form
+        method="GET"
+        action="schema-validation"
+        afterResponse={(response) => console.log(response)}
+        name="getAnotherUrl"
+      >
         <label htmlFor="q">
           Search{'\t'}
           <input type="text" name="q" id="q" />
@@ -100,7 +85,7 @@ export const MainPage: PageComponent = () => {
         <br />
         <br />
         <input type="submit" value="Submit" />
-      </form>
+      </Form>
     </div>
   );
 };

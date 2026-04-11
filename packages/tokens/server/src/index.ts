@@ -60,6 +60,13 @@ export const SERVER_MODULE_PAPI_FORM_ACTIONS = createToken<Papi>('serverModulePa
 
 /**
  * @description
+ * Cache name used as a flag to detect that enableResilientPwaFormAction() is active in the Service Worker.
+ * Must be the same value in @tramvai/pwa-recipes and @tramvai/module-form-action.
+ */
+export const FORM_ACTION_SYNC_CACHE_FLAG = '__tramvai_form_action_sync__';
+
+/**
+ * @description
  * Settings for the static server
  */
 export const SERVER_MODULE_STATICS_OPTIONS = createToken<ServerModuleStaticsOptions>(

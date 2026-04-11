@@ -23,6 +23,7 @@ import {
 import type { Papi } from '@tramvai/papi';
 import { createPapiMethod, getPapiParameters } from '@tramvai/papi';
 import { SERVER_MODULE_PAPI_FORM_ACTIONS } from '@tramvai/tokens-server';
+import fastifyMultipart from '@fastify/multipart';
 import { createApi } from './api';
 import { fileApiProvider } from './server/fileApi';
 import { sharedProviders } from './shared';
@@ -50,6 +51,10 @@ import { formActionProvider } from './server/formActionProvider';
           formActions,
         }) =>
         (app) => {
+          app.register(fastifyMultipart, {
+            attachFieldsToBody: 'keyValues',
+          });
+
           if (process.env.NODE_ENV === 'development') {
             const papiListRoute = createPapiMethod({
               method: 'get',
