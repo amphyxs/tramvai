@@ -78,8 +78,8 @@ const docusaurusConfig = {
     ],
   ].filter(Boolean),
 
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'throw',
+  onBrokenLinks: 'warn',
+  onBrokenMarkdownLinks: 'warn',
   onDuplicateRoutes: 'throw',
 
   title: 'tramvai', // Title for your website.

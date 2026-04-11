@@ -80,7 +80,7 @@ async function copyDocs({ from, to = docsDest, ignore = [] }) {
 
 async function copyDocFile({ from, to }) {
   try {
-    let fileContent = (await fs.readFile(from, 'utf-8')).split('\n');
+    let fileContent = (await fs.readFile(from, 'utf-8')).replace(/\r\n/g, '\n').split('\n');
     const fileCwd = path.dirname(from);
     const hasMetadata = fileContent[0] === '---';
     let removedMetadata;
@@ -95,7 +95,7 @@ async function copyDocFile({ from, to }) {
     }
 
     // добавляем указание на текущую директорию с файлом
-    fileContent.unshift(`<!--@doc-cwd ${path.dirname(from)}-->`);
+    fileContent.unshift(`<!--@doc-cwd ${path.dirname(from).replace(/\\/g, '/')}-->`);
 
     // возвращаем удаленный front matter
     if (removedMetadata) {
