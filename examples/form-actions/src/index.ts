@@ -5,6 +5,7 @@ import { ServerModule } from '@tramvai/module-server';
 
 import { SpaRouterModule } from '@tramvai/module-router';
 import { FormActionModule } from '@tramvai/module-form-action';
+import { TramvaiPwaModule } from '@tramvai/module-progressive-web-app';
 import { formActionProvider } from './formActions';
 
 createApp({
@@ -15,6 +16,7 @@ createApp({
     RenderModule.forRoot({ useStrictMode: true }),
     ServerModule,
     FormActionModule,
+    TramvaiPwaModule,
   ],
   providers: [
     // Example of form action passed via providers

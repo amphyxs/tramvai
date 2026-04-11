@@ -1,13 +1,14 @@
-import React, { PropsWithChildren } from "react";
-import { useEvents } from "@tramvai/state";
-import { useNavigate } from "@tinkoff/router";
-import { FormActionHttpMethods } from "./formActionHttpMethods";
-import { FormActionResponse } from "./formActionResult";
-import { setFormActionResult } from "./formActionModule";
+import React, { PropsWithChildren } from 'react';
+import { useEvents } from '@tramvai/state';
+import { useNavigate } from '@tinkoff/router';
+import { FormActionHttpMethods } from './formActionHttpMethods';
+import { FormActionResponse } from './formActionResult';
+import { setFormActionResult } from './formActionModule';
+import { handleResilientError } from './resilient';
 
 type Props = PropsWithChildren<{
   action?: string;
-  method?: "GET" | FormActionHttpMethods;
+  method?: 'GET' | FormActionHttpMethods;
   beforeSubmit?: (formData: FormData) =>
     | Promise<{
         formData: FormData;
@@ -18,13 +19,14 @@ type Props = PropsWithChildren<{
         preventDefault: boolean;
       };
   afterResponse?: (
-    formActionResponse: FormActionResponse,
+    formActionResponse: FormActionResponse
   ) => Promise<void> | void;
   encType?:
-    | "application/x-www-form-urlencoded"
-    | "multipart/form-data"
-    | "text/plain";
+    | 'application/x-www-form-urlencoded'
+    | 'multipart/form-data'
+    | 'text/plain';
   name?: string;
+  resilient?: boolean;
 }>;
 
 export const Form = (props: Props) => {
@@ -47,32 +49,52 @@ export const Form = (props: Props) => {
       formData = beforeSubmitResult.formData;
     }
 
-    const response = await fetch(form.action, {
-      method: form.method,
-      headers: {
-        Accept: "application/json",
-        "Enc-Type": form.enctype,
-      },
-      body: formData,
-    });
+    const headers: Record<string, string> = {
+      Accept: 'application/json',
+      'Enc-Type': form.enctype,
+    };
 
-    const responseJson: FormActionResponse = await response.json();
-
-    dispatchFormActionResult(responseJson.data);
-
-    if (responseJson.type === "redirect") {
-      await navigate(responseJson.redirectUrl);
+    if (props.resilient) {
+      headers['X-Tramvai-Form-Action-Request'] = '1';
     }
 
-    if (props.afterResponse) {
-      await props.afterResponse(responseJson);
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        headers,
+        body: formData,
+      });
+
+      const responseJson: FormActionResponse = await response.json();
+
+      dispatchFormActionResult(responseJson.data);
+
+      if (responseJson.type === 'redirect') {
+        await navigate(responseJson.redirectUrl);
+      }
+
+      if (props.afterResponse) {
+        await props.afterResponse(responseJson);
+      }
+    } catch (error) {
+      if (props.resilient) {
+        await handleResilientError(
+          error,
+          form.action,
+          form.method,
+          headers,
+          formData
+        );
+        return;
+      }
+      throw error;
     }
   };
 
   return (
     <form
       action={props.action}
-      method={props.method ?? "POST"}
+      method={props.method ?? 'POST'}
       encType={props.encType}
       onSubmit={(event) => onSubmit(event)}
     >

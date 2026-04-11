@@ -29,6 +29,25 @@
       "experiments": {
         "transpilation": {
           "loader": "swc"
+        },
+        "pwa": {
+          "sw": {
+            "src": "service-worker.ts",
+            "dest": "sw.js",
+            "scope": "/"
+          },
+          "workbox": {
+            "enabled": {
+              "production": true,
+              "development": true
+            }
+          },
+          "webmanifest": {
+            "enabled": true,
+            "dest": "/manifest.webmanifest",
+            "name": "Form Actions",
+            "short_name": "Form Actions"
+          }
         }
       }
     }

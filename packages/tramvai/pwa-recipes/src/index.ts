@@ -6,3 +6,4 @@ export * from './cache-application-static-assets';
 export * from './cache-application-images';
 export * from './cache-application-fonts';
 export * from './cache-application-pages';
+export * from './enable-resilient-pwa-form-action';

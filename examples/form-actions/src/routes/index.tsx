@@ -13,7 +13,7 @@ export const MainPage: PageComponent = () => {
 
       <h2>Form with method POST, action on current URL</h2>
 
-      <Form method="POST" afterResponse={(response) => console.log(response)} name="postCurrentUrl">
+      <Form method="POST" afterResponse={(response) => console.log(response)} name="postCurrentUrl" resilient>
         <fieldset>
           <legend>Form action response type</legend>
           <div>

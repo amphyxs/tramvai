@@ -10,7 +10,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:integration": "jest -w=3 --config ./jest.integration.config.js",
-    "test:integration:watch": "jest --runInBand --watch --config ./jest.integration.config.js"
+    "test:integration:watch": "jest --runInBand --watch --config ./jest.integration.config.js",
+    "test:pw": "npx playwright test",
+    "test:pw:ui": "npx playwright test --ui"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",
@@ -29,6 +31,7 @@
     "@tramvai/core": "0.0.0-stub",
     "@tramvai/module-common": "0.0.0-stub",
     "@tramvai/module-form-action": "0.0.0-stub",
+    "@tramvai/module-progressive-web-app": "0.0.0-stub",
     "@tramvai/module-render": "0.0.0-stub",
     "@tramvai/module-router": "0.0.0-stub",
     "@tramvai/module-server": "0.0.0-stub",
@@ -39,9 +42,11 @@
     "@tramvai/tokens-render": "0.0.0-stub",
     "@tramvai/tokens-router": "0.0.0-stub",
     "@tramvai/tokens-server": "0.0.0-stub",
+    "@tramvai/pwa-recipes": "0.0.0-stub",
     "react": "19.0.1",
     "react-compiler-runtime": "^19.0.0-beta-decd7b8-20250118",
     "react-dom": "19.0.1",
-    "tslib": "^2.4.0"
+    "tslib": "^2.4.0",
+    "workbox-core": "^6.6.1"
   }
 }
