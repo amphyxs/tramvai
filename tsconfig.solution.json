@@ -1,6 +1,337 @@
 {
-  "exclude": [
-      "**/*"
-  ],
-  "references": []
+    "exclude": [
+        "**/*"
+    ],
+    "references": [
+        {
+            "path": "packages/cli"
+        },
+        {
+            "path": "packages/api"
+        },
+        {
+            "path": "packages/plugin-babel-transpiler"
+        },
+        {
+            "path": "packages/plugin-swc-transpiler"
+        },
+        {
+            "path": "packages/plugin-webpack-builder"
+        },
+        {
+            "path": "packages/plugin-webpack-pwa"
+        },
+        {
+            "path": "packages/libs/browser-timings"
+        },
+        {
+            "path": "packages/libs/cookies"
+        },
+        {
+            "path": "packages/libs/dippy"
+        },
+        {
+            "path": "packages/libs/env-validators"
+        },
+        {
+            "path": "packages/libs/error-handlers"
+        },
+        {
+            "path": "packages/libs/errors"
+        },
+        {
+            "path": "packages/libs/eslint-plugin-tramvai"
+        },
+        {
+            "path": "packages/libs/hooks"
+        },
+        {
+            "path": "packages/libs/http-client"
+        },
+        {
+            "path": "packages/libs/is-modern-lib"
+        },
+        {
+            "path": "packages/libs/lazy-render"
+        },
+        {
+            "path": "packages/libs/main-polyfills"
+        },
+        {
+            "path": "packages/libs/measure-express-requests"
+        },
+        {
+            "path": "packages/libs/measure-fastify-requests"
+        },
+        {
+            "path": "packages/libs/meta-tags-generate"
+        },
+        {
+            "path": "packages/libs/metrics-noop"
+        },
+        {
+            "path": "packages/libs/minicss"
+        },
+        {
+            "path": "packages/libs/mocker"
+        },
+        {
+            "path": "packages/libs/module-loader-client"
+        },
+        {
+            "path": "packages/libs/module-loader-server"
+        },
+        {
+            "path": "packages/libs/monkeypatch"
+        },
+        {
+            "path": "packages/libs/package-manager-wrapper"
+        },
+        {
+            "path": "packages/libs/pageBuilder"
+        },
+        {
+            "path": "packages/libs/prettier"
+        },
+        {
+            "path": "packages/libs/pubsub"
+        },
+        {
+            "path": "packages/libs/react-hooks"
+        },
+        {
+            "path": "packages/libs/router"
+        },
+        {
+            "path": "packages/libs/safe-strings"
+        },
+        {
+            "path": "packages/libs/terminus"
+        },
+        {
+            "path": "packages/libs/tinkoff-layout"
+        },
+        {
+            "path": "packages/libs/tinkoff-request-http-client-adapter"
+        },
+        {
+            "path": "packages/libs/url"
+        },
+        {
+            "path": "packages/libs/user-agent"
+        },
+        {
+            "path": "packages/libs/webpack-dedupe-plugin"
+        },
+        {
+            "path": "packages/modules/autoscroll"
+        },
+        {
+            "path": "packages/modules/cache-warmup"
+        },
+        {
+            "path": "packages/modules/child-app"
+        },
+        {
+            "path": "packages/modules/client-hints"
+        },
+        {
+            "path": "packages/modules/common"
+        },
+        {
+            "path": "packages/modules/cookie"
+        },
+        {
+            "path": "packages/modules/deps-graph"
+        },
+        {
+            "path": "packages/modules/dns-cache"
+        },
+        {
+            "path": "packages/modules/env"
+        },
+        {
+            "path": "packages/modules/error-interceptor"
+        },
+        {
+            "path": "packages/modules/form-action"
+        },
+        {
+            "path": "packages/modules/http-client"
+        },
+        {
+            "path": "packages/modules/http-proxy-agent"
+        },
+        {
+            "path": "packages/modules/i18n"
+        },
+        {
+            "path": "packages/modules/log"
+        },
+        {
+            "path": "packages/modules/metrics"
+        },
+        {
+            "path": "packages/modules/micro-sentry"
+        },
+        {
+            "path": "packages/modules/mocker"
+        },
+        {
+            "path": "packages/modules/opentelemetry"
+        },
+        {
+            "path": "packages/modules/page-render-mode"
+        },
+        {
+            "path": "packages/modules/pwa"
+        },
+        {
+            "path": "packages/modules/react-query"
+        },
+        {
+            "path": "packages/modules/render"
+        },
+        {
+            "path": "packages/modules/request-limiter"
+        },
+        {
+            "path": "packages/modules/router"
+        },
+        {
+            "path": "packages/modules/sentry"
+        },
+        {
+            "path": "packages/modules/seo"
+        },
+        {
+            "path": "packages/modules/server"
+        },
+        {
+            "path": "packages/tokens/child-app"
+        },
+        {
+            "path": "packages/tokens/common"
+        },
+        {
+            "path": "packages/tokens/cookie"
+        },
+        {
+            "path": "packages/tokens/core"
+        },
+        {
+            "path": "packages/tokens/core-private"
+        },
+        {
+            "path": "packages/tokens/http-client"
+        },
+        {
+            "path": "packages/tokens/metrics"
+        },
+        {
+            "path": "packages/tokens/react-query"
+        },
+        {
+            "path": "packages/tokens/render"
+        },
+        {
+            "path": "packages/tokens/router"
+        },
+        {
+            "path": "packages/tokens/server"
+        },
+        {
+            "path": "packages/tokens/server-private"
+        },
+        {
+            "path": "packages/tramvai/child-app-core"
+        },
+        {
+            "path": "packages/tramvai/core"
+        },
+        {
+            "path": "packages/tramvai/experiments"
+        },
+        {
+            "path": "packages/tramvai/papi"
+        },
+        {
+            "path": "packages/tramvai/pwa-recipes"
+        },
+        {
+            "path": "packages/tramvai/react"
+        },
+        {
+            "path": "packages/tramvai/react-query"
+        },
+        {
+            "path": "packages/tramvai/state"
+        },
+        {
+            "path": "packages/tramvai/storybook-addon"
+        },
+        {
+            "path": "packages/tramvai/types-actions-state-context"
+        },
+        {
+            "path": "packages/tramvai/test/child-app"
+        },
+        {
+            "path": "packages/tramvai/test/helpers"
+        },
+        {
+            "path": "packages/tramvai/test/integration"
+        },
+        {
+            "path": "packages/tramvai/test/integration-jest"
+        },
+        {
+            "path": "packages/tramvai/test/jsdom"
+        },
+        {
+            "path": "packages/tramvai/test/mocks"
+        },
+        {
+            "path": "packages/tramvai/test/playwright"
+        },
+        {
+            "path": "packages/tramvai/test/puppeteer"
+        },
+        {
+            "path": "packages/tramvai/test/react"
+        },
+        {
+            "path": "packages/tramvai/test/unit"
+        },
+        {
+            "path": "packages/tramvai/test/unit-jest"
+        },
+        {
+            "path": "tools/build"
+        },
+        {
+            "path": "tools/check-versions"
+        },
+        {
+            "path": "tools/migrate"
+        },
+        {
+            "path": "tools/monorepo/depscheck"
+        },
+        {
+            "path": "tools/monorepo/fix-ts-references"
+        },
+        {
+            "path": "tools/monorepo/pkgs-collector"
+        },
+        {
+            "path": "tools/monorepo/pkgs-collector-dir"
+        },
+        {
+            "path": "tools/monorepo/pkgs-collector-workspaces"
+        },
+        {
+            "path": "examples/form-actions"
+        }
+    ]
 }
