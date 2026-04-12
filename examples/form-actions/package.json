@@ -11,13 +11,8 @@
     "test:watch": "jest --watch",
     "test:integration": "jest -w=3 --config ./jest.integration.config.js",
     "test:integration:watch": "jest --runInBand --watch --config ./jest.integration.config.js",
-<<<<<<< HEAD
     "test:pw": "npx playwright test",
     "test:pw:ui": "npx playwright test --ui"
-=======
-    "test:pw": "playwright test",
-    "test:pw:ui": "playwright test --ui"
->>>>>>> 78910860 (add tests)
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",
